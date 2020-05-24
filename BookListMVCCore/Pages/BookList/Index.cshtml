@@ -7,7 +7,7 @@
         <h2 class="text-info">Book List</h2>
     </div>
     <div class="col-3 offset-3">
-        <a asp-action="Upsert" asp-controller="Books" class="btn btn-info form-control text-white">
+        <a asp-page="Create"  class="btn btn-info form-control text-white">
             Add New Book
         </a>
     </div>
@@ -24,7 +24,7 @@
                         <th>Name</th>
                         <th>Author</th>
                         <th>ISBN</th>
-                     
+                        <th></th>
                     </tr>
                     @foreach(var item in Model.Books)
                     {
@@ -38,9 +38,11 @@
                     <td>
                         @Html.DisplayFor(m => item.ISBN)
                     </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="btn btn-success btn-sm text-white">Edit</button>
+                    </td>
                 </tr>
-
-
                     }
                 </thead>
             </table>
