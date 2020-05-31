@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookListMVCCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookListMVCCore.Pages.BookList
@@ -22,6 +23,21 @@ namespace BookListMVCCore.Pages.BookList
         public async void OnGet(int id)
         {
             Book = await db.Books.FindAsync(id);
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid) 
+            {
+              var bookFromdb = await db.Books.FindAsync(Book.Id);
+                bookFromdb.Name = Book.Name;
+                bookFromdb.ISBN = Book.ISBN;
+                bookFromdb.Author = Book.Author;
+                await db.SaveChangesAsync();
+
+                return RedirectToPage("Index");
+            }
+            return RedirectToPage();
         }
     }
 }
