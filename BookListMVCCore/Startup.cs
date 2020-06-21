@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookListMVCCore.Models;
+using BookListMVCCore.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace BookListMVCCore
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddTransient<ILoading,Loading>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
